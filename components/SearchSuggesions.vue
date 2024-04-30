@@ -14,10 +14,10 @@
             <div class="modal-content">
 
                 <ul class="  ">
-                    <li v-for="item in items" :key="item.identifier">
-                        <ULink :to="`/dictionary/${item.name}`" @click="handleLinkClick(item.name)">
+                    <li v-for="item in items" :key="item.Word">
+                        <ULink :to="`/dictionary/${item.Word}`" @click="handleLinkClick(item.Word)">
                             <div class="w-full hover:bg-gray-500 p-1 rounded">
-                                <strong>{{ getName(item.name)[0] }}</strong> <span> {{ getName(item.name)[1] }}</span>
+                                <strong>{{ getName(item.Word)[0] }}</strong><span>{{ getName(item.Word)[1] }}</span>
                             </div>
                         </ULink>
 
@@ -36,7 +36,7 @@ import { onClickOutside } from '@vueuse/core'
 const route = useRoute()
 var open = ref(false)
 var inputValue = ref('')
-var items = ref<IResponse[]>([])
+var items = ref<IResponseWords[]>([])
 const target = ref(null)
 
 const handleSubmit = () => {
@@ -77,9 +77,11 @@ const handleInput = async (event: any) => {
     // inputValue.value = event.target.value
     if (inputValue2.length > 1) {
 
-        const response = await useCustomFetch(`?q=${inputValue2}`, "GET") as any;
+        const response = await useCustomFetch(`/suggestions?term=${inputValue2}`, "GET") as any;
+
+        console.log(response.value, "resз")
         if (response?.value) {
-            items.value = response.value.data.items
+            items.value = response.value
 
         }
     } else {

@@ -6,3 +6,12 @@ interface IResponse {
   description: string;
   published_at: string;
 }
+
+
+interface IResponseWords {
+  ID: Number;
+  Code: string;
+  Word: string;
+  Definition: string;
+  Synonyms: Array<any>
+}

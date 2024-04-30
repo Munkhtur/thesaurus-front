@@ -4,12 +4,12 @@
         <span class="entry"></span>
         <div class="anchor-label">{{ index! + 1 }}</div>
         <div class="flex flex-col ml-10 gap-10">
-            <p class="font-bold">{{ word.definition }}</p>
+            <p class="font-bold">{{ word.Definition }}</p>
             <!-- <div class="grid grid-cols-4 gap-4 "> -->
             <div class="flex flex-wrap gap-4 ">
-                <div v-for="(item, index) in word.synonyms">
-                    <UButton :to="`/dictionary/${item}`">
-                        {{ item }}</UButton>
+                <div v-for="(item, index) in word.Synonyms">
+                    <UButton :to="`/dictionary/${item.Word}`">
+                        {{ item.Word }}</UButton>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
 const props = defineProps({
     word: {
         type: Object,
-        default: () => ({ definition: '', synonyms: [] })
+        default: () => ({ Definition: '', Synonyms: [] })
     },
     index: Number
 });

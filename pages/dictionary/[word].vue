@@ -12,25 +12,50 @@
 
 <script setup lang="ts">
 const route = useRoute()
-
+var items = ref<IResponseWords[]>([])
 // When accessing /posts/1, route.params.id will be 1
 console.log(route.params.word)
 
+onMounted(()=>{
+    console.log(route.params.word, "onm")
+    loadData()
+})
 
-var items = [
-    {
-        definition: "a sudden experiencing of a physical or mental disorder",
-        synonyms: ["attack", "bout", "seizure", "case", "spell", "turn", "fit",
-            "siege", "pang", "breakdown", "recurrence", "relapse", "spasm", "frenzy", "collapse",
-            "convulsion", "agitation", "eclampsia", "brainstorm", "paroxysm", "throe", "prostration"]
-    },
-    {
-        definition: "a sudden experiencing of a physical or mental disorder",
-        synonyms: ["attack", "bout", "seizure", "case", "spell", "turn", "fit",
-            "siege", "pang", "breakdown", "recurrence", "relapse", "spasm", "frenzy", "collapse",
-            "convulsion", "agitation", "eclampsia", "brainstorm", "paroxysm", "throe", "prostration"]
-    }
-]
+const loadData= async ()=>{
+    const response = await useCustomFetch(`/find?term=${route.params.word}`, "GET") as any;
+
+console.log(response.value, "resз")
+if (response?.value) {
+    items.value = response.value
+
+}
+
+items.value.forEach(async (element: IResponseWords) => {
+    const response = await useCustomFetch(`/search?code=${element.Code}`, "GET") as any;
+
+console.log(response.value, "synonsymsres")
+if (response?.value) {
+    element!.Synonyms = response.value
+
+}
+});
+}
+
+
+// var items = [
+//     {
+//         definition: "a sudden experiencing of a physical or mental disorder",
+//         synonyms: ["attack", "bout", "seizure", "case", "spell", "turn", "fit",
+//             "siege", "pang", "breakdown", "recurrence", "relapse", "spasm", "frenzy", "collapse",
+//             "convulsion", "agitation", "eclampsia", "brainstorm", "paroxysm", "throe", "prostration"]
+//     },
+//     {
+//         definition: "a sudden experiencing of a physical or mental disorder",
+//         synonyms: ["attack", "bout", "seizure", "case", "spell", "turn", "fit",
+//             "siege", "pang", "breakdown", "recurrence", "relapse", "spasm", "frenzy", "collapse",
+//             "convulsion", "agitation", "eclampsia", "brainstorm", "paroxysm", "throe", "prostration"]
+//     }
+// ]
 </script>
 
 
