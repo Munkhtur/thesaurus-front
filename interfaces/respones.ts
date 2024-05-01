@@ -7,11 +7,18 @@ interface IResponse {
   published_at: string;
 }
 
-
 interface IResponseWords {
   ID: Number;
   Code: string;
   Word: string;
   Definition: string;
-  Synonyms: Array<any>
+  Synonyms: Array<Synonyms>;
+}
+
+interface Synonyms {
+  ID: Number;
+  Code: string;
+  Word: string;
+  Definition: string;
+  Level: Number;
 }

@@ -1,11 +1,13 @@
 <template>
 
-    <div ref="target" class="relative">
-        <form @submit.prevent="handleSubmit" class="w-full">
-            <UButtonGroup size="xl" orientation="horizontal" class="w-full relative z-10">
-                <UInput v-model="inputValue" size="sm" color="white" placeholder="Search..." @input="handleInput"
-                    class="w-full" variant="outline" input-class="dark:focus:ring-none" @keypress.enter="handleSubmit"
-                    @click="handleInputClick" @onchange="handleChange" />
+    <div ref="target" class="relative wil">
+        <form @submit.prevent="handleSubmit" class="w-full ">
+            <UButtonGroup size="xl" orientation="horizontal" class="w-full relative "
+                :class="{ 'focused': isInputFocused }">
+                <UInput v-model="inputValue" size="sm" color="white" placeholder="Хайх..." @input="handleInput"
+                    class="w-full " variant="outline" input-class="dark:focus:ring-none custom-button-group"
+                    @keypress.enter="handleSubmit" @click="handleInputClick" @onchange="handleChange" autofocus
+                    :onFocus="moveCaretAtEnd" @focus="isInputFocused = true" @blur="isInputFocused = false" />
                 <UButton icon="i-heroicons-magnifying-glass-20-solid" class="px-5" />
             </UButtonGroup>
         </form>
@@ -38,11 +40,10 @@ var open = ref(false)
 var inputValue = ref('')
 var items = ref<IResponseWords[]>([])
 const target = ref(null)
+const isInputFocused = ref(false);
 
 const handleSubmit = () => {
-    // Submit form with input value
-    console.log('Form submitted with input value:', inputValue.value);
-
+    navigateTo(`/dictionary/${inputValue.value}`)
 };
 
 
@@ -109,5 +110,20 @@ const getName = (word: string): string[] => {
     return [sub1, sub2]
 }
 
+const moveCaretAtEnd = (e: any) => {
+    var temp_value = e.target.value
+    e.target.value = ''
+    e.target.value = temp_value
+}
+
 
 </script>
+<style scoped>
+/* .custom-input {
+    border-radius: 0;
+} */
+
+.focused {
+    outline: 2px solid #d56222;
+}
+</style>

@@ -1,16 +1,19 @@
 <template>
 
-    <div class="flex relative w-1/2 my-10">
+    <div class="flex relative w-full my-10">
         <span class="entry"></span>
-        <div class="anchor-label">{{ index! + 1 }}</div>
+        <h1 class="anchor-label">{{ index! + 1 }} </h1>
         <div class="flex flex-col ml-10 gap-10">
-            <p class="font-bold">{{ word.Definition }}</p>
+            <p class="font-bold"> {{ word.Definition }}</p>
             <!-- <div class="grid grid-cols-4 gap-4 "> -->
             <div class="flex flex-wrap gap-4 ">
                 <div v-for="(item, index) in word.Synonyms">
-                    <UButton :to="`/dictionary/${item.Word}`">
-                        {{ item.Word }}</UButton>
+                    <!-- <UButton :to="`/dictionary/${item.Word}`">
+                        {{ item.Word }} {{ $props.levels?.indexOf(item.Level) }}</UButton> -->
+                    <CustomeButton :url="`/dictionary/${item.Word}`" :level="$props.levels?.indexOf(item.Level)">{{
+                        item.Word }}</CustomeButton>
                 </div>
+
             </div>
         </div>
         <div class="anchor"></div>
@@ -26,7 +29,8 @@ const props = defineProps({
         type: Object,
         default: () => ({ Definition: '', Synonyms: [] })
     },
-    index: Number
+    index: Number,
+    levels: Array<any>
 });
 const { word } = props;
 const getHue = () => {
@@ -59,7 +63,7 @@ const getLightness = (index: any) => {
 }
 
 .anchor-label {
-    color: #303336;
+    /* color: #303336; */
     font-family: Open Sans, Helvetica, Arial, sans-serif;
     font-size: 19px;
     font-style: normal;

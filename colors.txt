@@ -1,0 +1,34 @@
+- Tailwind
+
+{ 'syracuse_red_orange': { DEFAULT: '#d1510a', 100: '#2a1002', 200: '#542004', 300: '#7e3006', 400: '#a84008', 500: '#d1510a', 600: '#f56b21', 700: '#f79058', 800: '#fab590', 900: '#fcdac7' }, 'linen': { DEFAULT: '#f3e8e2', 100: '#42291c', 200: '#845237', 300: '#bc7f5e', 400: '#d7b3a0', 500: '#f3e8e2', 600: '#f5ede8', 700: '#f8f1ee', 800: '#faf6f3', 900: '#fdfaf9' }, 'eerie_black': { DEFAULT: '#191818', 100: '#050505', 200: '#0a0a0a', 300: '#100f0f', 400: '#151414', 500: '#191818', 600: '#494646', 700: '#787373', 800: '#a5a1a1', 900: '#d2d0d0' }, 'seasalt': { DEFAULT: '#fbfaf9', 100: '#3c3228', 200: '#786450', 300: '#ab9681', 400: '#d3c8bd', 500: '#fbfaf9', 600: '#fcfbfa', 700: '#fdfcfb', 800: '#fdfdfd', 900: '#fefefe' } }
+
+- CSV
+
+d1510a,f3e8e2,191818,fbfaf9
+
+- With #
+
+#d1510a, #f3e8e2, #191818, #fbfaf9
+
+- Array
+
+["d1510a","f3e8e2","191818","fbfaf9", "#1C1613", "#5E5E5E"]
+
+- Object
+
+{"Syracuse Red Orange":"d1510a","Linen":"f3e8e2","Eerie black":"191818","Seasalt":"fbfaf9"}
+
+- Extended Array
+
+[{"name":"Syracuse Red Orange","hex":"d1510a","rgb":[209,81,10],"cmyk":[0,61,95,18],"hsb":[21,95,82],"hsl":[21,91,43],"lab":[51,48,59]},{"name":"Linen","hex":"f3e8e2","rgb":[243,232,226],"cmyk":[0,5,7,5],"hsb":[21,7,95],"hsl":[21,41,92],"lab":[93,3,4]},{"name":"Eerie black","hex":"191818","rgb":[25,24,24],"cmyk":[0,4,4,90],"hsb":[0,4,10],"hsl":[0,2,10],"lab":[8,0,0]},{"name":"Seasalt","hex":"fbfaf9","rgb":[251,250,249],"cmyk":[0,0,1,2],"hsb":[30,1,98],"hsl":[30,20,98],"lab":[98,0,1]}]
+
+- XML
+
+<palette>
+  <color name="Syracuse Red Orange" hex="d1510a" r="209" g="81" b="10" />
+  <color name="Linen" hex="f3e8e2" r="243" g="232" b="226" />
+  <color name="Eerie black" hex="191818" r="25" g="24" b="24" />
+  <color name="Seasalt" hex="fbfaf9" r="251" g="250" b="249" />
+</palette>
+
+
