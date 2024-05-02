@@ -1,7 +1,7 @@
 <template>
 
     <nav type="primary" class="flex gap-5  p-6 justify-between items-center sticky top-0 w-full z-10 bg-eerie_black">
-        <a slot="brand" class="navbar-brand justify-start" href="/">Navbar</a>
+        <a slot="brand" class="navbar-brand justify-start" @click="navigateTo('/')">Navbar</a>
         <div class="w-full xl:w-1/3  md:w-1/2 sm:w-full  z-10">
             <SearchSuggesions />
         </div>

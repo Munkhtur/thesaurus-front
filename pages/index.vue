@@ -1,19 +1,26 @@
 <template>
 
-    <div class="h-screen w-full">
-        <div class="w-full flex justify-center items-center h-60">
-            <div class="w-full xl:w-1/3  md:w-1/2 sm:w-full   ">
-
-                <SearchSuggesions />
+    <div class="hero w-full">
+        <div class="w-full flex justify-center items-center ">
+            <div class="w-full xl:w-1/3  md:w-1/2 sm:w-full   flex flex-col justify-center max-w-xl">
+                <h1 class="hero-text my-10 text-center leading-none text-4xl md:text-7xl sm:text-5xl font-extrabold ">
+                    Lorem ipsum
+                    dolor sit amet consectetur.
+                </h1> <span :class="{ 'slide-in': animated }">{{ currentWord }}</span>
+                <!-- <SearchSuggesions /> -->
+                <HomeSearch />
             </div>
         </div>
-        <h1>Welcome to the homepage</h1>
-
-        This is an auto-imported component
-        <h1 class="text-3xl font-bold underline">
-            Hello world!
-        </h1>
-
+        <div class="flex justify-center gap-44 my-20 text-3xl">
+            <div class="flex flex-col justify-center items-center">
+                <div class="font-bold">30000+</div>
+                <div>snlsrejng</div>
+            </div>
+            <div class="flex flex-col justify-center items-center">
+                <div class="font-bold">30000+</div>
+                <div>snlsrejng</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -24,4 +31,49 @@ definePageMeta({
     layout: "home",
 });
 
+const words = ["jnvj", "kjhdkf"]
+var currentIndex = ref(0)
+var currentWord = ref('')
+var animated = ref(false)
+setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % words.length;
+    animated.value = true;
+    setTimeout(() => {
+        animated.value = false;
+    }, 1000); // Adjust timing as needed
+}, 3000)
+
+currentWord = computed(() => {
+    return words[currentIndex.value]
+})
+
 </script>
+
+
+<style>
+/* .hero-text {
+    font-family: "Player Display sans-serif";
+    font-size: 70px;
+    font-weight: 700;
+} */
+
+.hero {
+    height: 87vh
+}
+
+.slide-in {
+    animation: slideInAnimation 1s forwards;
+}
+
+@keyframes slideInAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>

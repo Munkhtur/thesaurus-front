@@ -10,10 +10,10 @@ export const useCustomFetch = async <T>(
   options: UseFetchOptions<T> = {},
   baseUrl: string = apiUrl
 ) => {
+  const toast = useToast();
   try {
     const token = useCookie("token");
     const terminalToken = useCookie<string>("terminalToken");
-    const toast = useToast();
     const headers: any = {};
 
     // headers["Authorization"] = `Bearer ${token.value || terminalToken.value}`;
@@ -29,8 +29,21 @@ export const useCustomFetch = async <T>(
     console.log(url, "url usefetch")
     const { data: response, error } = await useFetch(url, params);
 
+    if (error.value) {
+      toast.add({
+        title: "Амжилтгүй",
+        color: "amber",
+      });
+
+      return null;
+    }
+
     return response;
   } catch (e) {
     console.warn("use custom fetch warning: ", e);
+    toast.add({
+      title: "Амжилтгүй",
+      color: "amber",
+    });
   }
 };
