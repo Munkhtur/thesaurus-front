@@ -10,8 +10,8 @@
                 <div v-for="(item, index) in word.Synonyms">
                     <!-- <UButton :to="`/dictionary/${item.Word}`">
                         {{ item.Word }} {{ $props.levels?.indexOf(item.Level) }}</UButton> -->
-                    <CustomeButton :url="`/dictionary/${item.Word}`" :level="$props.levels?.indexOf(item.Level)">{{
-                        item.Word }}</CustomeButton>
+                    <CustomButton :url="`/dictionary/${item.Word}`" :level="distinctLevels.indexOf(item.Level)">{{
+                        item.Word }}</CustomButton>
                 </div>
 
             </div>
@@ -30,23 +30,13 @@ const props = defineProps({
         default: () => ({ Definition: '', Synonyms: [] })
     },
     index: Number,
-    levels: Array<any>
+
 });
 const { word } = props;
-const getHue = () => {
-    // Calculate hue based on index (for demonstration, I'm using a simple logic)
-    return 143; // Change the multiplication factor to adjust the hue range
-};
+var distinctLevels = ref<Number[]>([])
 
-const getSaturation = () => {
-    // Calculate saturation based on index (for demonstration, I'm using a constant value)
-    return 100; // Adjust the value to change saturation
-};
+distinctLevels = [...new Set(word.Synonyms.map((item: any) => item.Level).flat())] as any;
 
-const getLightness = (index: any) => {
-    // Calculate lightness based on index (for demonstration, I'm using a constant value)
-    return ((index + 1) * 40) % 360; // Adjust the value to change lightness
-};
 </script>
 
 <style>

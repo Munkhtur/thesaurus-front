@@ -1,6 +1,6 @@
 <template>
 
-    <nav type="primary" class="flex gap-5  p-2 justify-between items-center sticky top-0 w-full z-10 bg-eerie_black">
+    <nav type="primary" class="flex gap-5  p-2 justify-around items-center dark:bg-eerie_black">
         <a slot="brand" class="navbar-brand justify-start" href="/">Navbar</a>
 
         <UButton :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'
