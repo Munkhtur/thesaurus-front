@@ -35,35 +35,43 @@ var items = ref<IResponseWords[]>([])
 var distinctLevels = ref<Number[]>([])
 // When accessing /posts/1, route.params.id will be 1
 
-items.value = dictionaryData as any;
+// items.value = dictionaryData as any;
 // Assuming items.value is an array of IResponseWords objects
-distinctLevels = [...new Set(items.value.map(item => item.Synonyms.map(synonym => synonym.Level)).flat())] as any;
 
-console.log(distinctLevels)
-// onMounted(()=>{
-//     console.log(route.params.word, "onm")
-//     loadData()
-// })
 
-// const loadData= async ()=>{
-//     const response = await useCustomFetch(`/find?term=${route.params.word}`, "GET") as any;
+onMounted(()=>{
+    console.log(route.params.word, "onm")
+    loadData()
+})
 
-//         console.log(response.value, "resз")
-//         if (response?.value) {
-//             items.value = response.value
+const loadData= async ()=>{
+    console.log(route.params.word, "loadfata")
+    const response = await useCustomFetch(`/find?term="${route.params.word}"`, "GET") as any;
 
-//         }
+        console.log(response.value, "resз")
+        if (response?.value) {
+            items.value = response.value
 
-//         items.value.forEach(async (element: IResponseWords) => {
-//             const response = await useCustomFetch(`/search?code=${element.Code}`, "GET") as any;
+        }
 
-//         console.log(response.value, "synonsymsres")
-//         if (response?.value) {
-//             element!.Synonyms = response.value
+        items.value.forEach(async (element: IResponseWords) => {
+            const response = await useCustomFetch(`/search?code=${element.Code}`, "GET") as any;
 
-//         }
-//         });
-// }
+        console.log(response.value, "synonsymsres")
+        if (response?.value) {
+            element!.Synonyms = response.value
+
+        }
+        });
+
+
+        // distinctLevels = [...new Set(items.value.map(item => item.Synonyms.map(synonym => synonym.Level)).flat())] as any;
+        
+    }
+    distinctLevels.value = Array.from(new Set(items.value.flatMap(item => item.Synonyms.map(synonym => synonym.Level))));
+
+console.log(distinctLevels, "lvel")
+
 
 
 // var items = [
