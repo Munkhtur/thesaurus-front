@@ -21,12 +21,11 @@
                     <div class="w-3 h-2 rounded bg-templateprimary-300"></div>
                 </div>
             </div>
-            <!-- Render items if it has values -->
             <DefnitionBlock v-for="(item, index) in items" :key="index" :word="item" :index="index" />
         </template>
         <template v-else>
-            <!-- Render a message if items is empty or undefined -->
-            <p> {{ $route.params.word }} Not found</p>
+            <h1 class=" main-word">"{{ $route.params.word }}"</h1>
+            <p>Таны хайсан үг олдсонгүй. Зөв бичсэн эсэхээ шалгаад дахин оролдоно уу.</p>
         </template>
     </div>
 </template>

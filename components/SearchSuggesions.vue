@@ -5,9 +5,10 @@
             <UButtonGroup size="xl" orientation="horizontal" class="w-full relative "
                 :class="{ 'focused': isInputFocused }">
                 <UInput v-model="inputValue" size="sm" color="white" placeholder="Хайх..." @input="handleInput"
+                    oninvalid="setCustomValidity('Зөвхөн криллээр хайлт өгнө үү')" pattern="^[а-яА-ЯөӨёЁүҮ ]*$"
                     class="w-full " variant="outline" input-class="dark:focus:ring-none custom-button-group"
-                    @keypress.enter="handleSubmit" @click="handleInputClick" @onchange="handleChange" autofocus
-                    :onFocus="moveCaretAtEnd" @focus="isInputFocused = true" @blur="isInputFocused = false" />
+                    @click="handleInputClick" @onchange="handleChange" autofocus :onFocus="moveCaretAtEnd"
+                    @focus="isInputFocused = true" @blur="isInputFocused = false" />
                 <UButton icon="i-heroicons-magnifying-glass-20-solid" class="px-5" />
             </UButtonGroup>
         </form>
@@ -43,7 +44,10 @@ const target = ref(null)
 const isInputFocused = ref(false);
 
 const handleSubmit = () => {
-    navigateTo(`/dictionary/${inputValue.value}`)
+    inputValue.value = inputValue.value.trim()
+    if (inputValue.value) {
+        navigateTo(`/dictionary/${inputValue.value}`)
+    }
 };
 
 
@@ -76,6 +80,18 @@ if (route.params.word) {
 const handleInput = async (event: any) => {
     var inputValue2 = event.target.value;
     // inputValue.value = event.target.value
+
+    const input = event.target;
+    const value = input.value;
+
+    if (!value.match(/^[а-яА-ЯөӨёЁүҮ ]*$/)) {
+
+        input.setCustomValidity('Зөвхөн криллээр хайлт өгнө үү')
+        return
+    } else {
+        input.setCustomValidity('')
+    }
+
     if (inputValue2.length > 1) {
 
         const response = await useCustomFetch(`/suggestions?term=${inputValue2}`, "GET") as any;
