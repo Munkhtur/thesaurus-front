@@ -56,10 +56,10 @@ const loadData = async () => {
 
         const response = await useCustomFetch(`/find`, "POST", {
             body: {
-                term: route.params.word
+                word: route.params.word
             }
         }) as any;
-
+        console.log(response, "response 0000000")
         if (response?.value) {
             items.value = response.value
         }

@@ -12,7 +12,7 @@
             </UButtonGroup>
         </form>
 
-        <div v-show="open" class="modal transition-opacity absolute bg-white text-black rounded py-2 px-5 w-full">
+        <div v-show="open" class="modal transition-opacity absolute bg-white text-black rounded py-2 px-5 w-full drop-shadow-xl">
             <div class="modal-content">
 
                 <ul class="  ">

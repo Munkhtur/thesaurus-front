@@ -13,7 +13,7 @@
             </UButtonGroup> -->
 
             <input v-model="inputValue" type="text" class="w-full h-14 focus:outline-none px-5 bg-transparent "
-                placeholder="өблориаылирал рол" autofocus>
+                placeholder="өблориаылирал рол" autofocus  @input="handleInput"   @keypress.enter="handleSubmit" @click="handleInputClick" @onchange="handleChange" >
             <UButton size="sm" icon="i-heroicons-magnifying-glass-20-solid" :trailing="true" class="px-5">Хайх
             </UButton>
         </form>
@@ -23,7 +23,7 @@
         drop-shadow-xl">
             <div class="modal-content">
 
-                <!-- <ul class="  ">
+                <ul class="  ">
                     <li v-for="item in items" :key="item.Word">
                         <ULink :to="`/dictionary/${item.Word}`" @click="handleLinkClick(item.Word)">
                             <div class="w-full hover:bg-gray-500 p-1 rounded">
@@ -32,18 +32,8 @@
                         </ULink>
 
                     </li>
-                </ul> -->
-                <ul>
-                    <li>kjfkerj</li>
-                    <li>kjfkerj</li>
-                    <li>kjfkerj</li>
-                    <li>kjfkerj</li>
-                    <li>kjfkerj</li>
-                    <li>kjfkerj</li>
-                    <li>kjfkerj</li>
-                    <li>kjfkerj</li>
-                    <li>kjfkerj</li>
                 </ul>
+           
             </div>
 
         </div>
