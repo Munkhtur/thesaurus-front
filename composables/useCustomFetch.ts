@@ -26,7 +26,7 @@ export const useCustomFetch = async <T>(
     };
 
     const params = defu(options, defaults);
-
+    console.log(url, "url usefetch")
     const { data: response, error } = await useFetch(url, params);
 
     if (error.value) {
