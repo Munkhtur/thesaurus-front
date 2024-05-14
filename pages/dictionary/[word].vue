@@ -54,14 +54,15 @@ const loadData = async () => {
 
     try {
 
-        const response = await useCustomFetch(`/find`, "POST", {
-            body: {
+        const response = await $fetch("http://localhost:8000/find" , {
+            method: "post",
+            body:{
                 word: route.params.word
             }
-        }) as any;
+        })
         console.log(response, "response 0000000")
-        if (response?.value) {
-            items.value = response.value
+        if (response) {
+            items.value = response as any
         }
     } catch (error: any) {
         toast.add({

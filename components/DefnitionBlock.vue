@@ -4,7 +4,7 @@
         <span class="entry"></span>
         <h1 class="anchor-label">{{ index! + 1 }} </h1>
         <div class="flex flex-col ml-10 gap-10">
-            <p class="font-bold"> {{ word.Word.Definition }}</p>
+            <p class="font-bold"  v-html="word.Word.Definition"></p>
             <!-- <div class="grid grid-cols-4 gap-4 "> -->
             <div class="flex flex-wrap gap-4 ">
                 <div v-for="(item, index) in word.Synonyms">

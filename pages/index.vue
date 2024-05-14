@@ -3,9 +3,9 @@
     <div class="hero w-full">
         <div class="w-full flex justify-center items-center ">
             <div class="w-full xl:w-1/3  md:w-1/2 sm:w-full   flex flex-col justify-center max-w-xl">
-                <h1 class="hero-text my-10 text-center leading-none text-4xl md:text-7xl sm:text-5xl font-extrabold ">
-                    <span :class="{ 'slide-in': animated }">{{ currentWord }}</span>    Lorem ipsum
-                    dolor sit amet  consectetur.
+                <h1 class="hero-text my-10 text-center leading-none text-4xl  lg:text-7xl md:text-6xl font-extrabold ">
+                      Lorem ipsum
+                    dolor sit amet  <span :class="{'slide-in': animated}">{{ currentWord }}</span>  consectetur.
                 </h1> 
                 <!-- <SearchSuggesions /> -->
                 <HomeSearch />
@@ -21,6 +21,8 @@
                 <div>snlsrejng</div>
             </div>
         </div>
+
+        <p>ksdjfnvlksfjd<br> knesrlkjtgnkj</p>
     </div>
 </template>
 
@@ -34,17 +36,17 @@ definePageMeta({
 const words = ["jnvj", "kjhdkf"]
 var currentIndex = ref(0)
 var currentWord = ref('')
-var animated = ref(false)
+var animated = ref(true)
 
 onMounted(()=>{
 
     setInterval(() => {
         currentIndex.value = (currentIndex.value + 1) % words.length;
-        animated.value = true;
-        setTimeout(() => {
-            animated.value = false;
-        }, 1000); // Adjust timing as needed
-    }, 3000)
+        // animated.value = true;
+        // setTimeout(() => {
+        //     animated.value = false;
+        // }, 1000); // Adjust timing as needed
+    }, 2000)
 
 })
 
@@ -55,7 +57,7 @@ currentWord = computed(() => {
 </script>
 
 
-<style>
+<style scoped>
 /* .hero-text {
     font-family: "Player Display sans-serif";
     font-size: 70px;
@@ -67,18 +69,30 @@ currentWord = computed(() => {
 }
 
 .slide-in {
-    animation: slideInAnimation 1s forwards;
+  animation: moveFromTop 2s ease-in-out;
 }
 
-@keyframes slideInAnimation {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
+@keyframes moveFromTop {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes changeWord {
+  0% {
+    /* opacity: 0; */
+    transform: translateY(-50%);
+  }
+  50% {
+    /* opacity: 1; */
+    transform: translateY(0);
+  }
+  100% {
+      transform: translateY(50%);
+    /* opacity: 0; */
+  }
 }
 </style>

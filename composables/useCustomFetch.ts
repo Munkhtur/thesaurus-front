@@ -26,7 +26,7 @@ export const useCustomFetch = async <T>(
     };
 
     const params = defu(options, defaults);
-    console.log(url, "url usefetch")
+    console.log(params, "url usefetch")
     const { data: response, error } = await useFetch(url, params);
 
     if (error.value) {
@@ -37,7 +37,8 @@ export const useCustomFetch = async <T>(
 
       return null;
     }
-
+    console.log(response , "ysefect res")
+    console.log(error , "ysefect errro")
     return response;
   } catch (e) {
     console.warn("use custom fetch warning: ", e);

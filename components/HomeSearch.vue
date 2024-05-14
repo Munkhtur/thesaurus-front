@@ -13,7 +13,8 @@
             </UButtonGroup> -->
 
             <input v-model="inputValue" type="text" class="w-full h-14 focus:outline-none px-5 bg-transparent "
-                placeholder="өблориаылирал рол" autofocus  @input="handleInput"   @keypress.enter="handleSubmit" @click="handleInputClick" @onchange="handleChange" >
+                placeholder="өблориаылирал рол" autofocus  @input="handleInput"   @keypress.enter="handleSubmit" 
+                @click="handleInputClick" @onchange="handleChange" >
             <UButton size="sm" icon="i-heroicons-magnifying-glass-20-solid" :trailing="true" class="px-5">Хайх
             </UButton>
         </form>
@@ -84,13 +85,14 @@ if (route.params.word) {
 
 }
 const handleInput = async (event: any) => {
+    console.log(event.target.value)
     var inputValue2 = event.target.value;
     // inputValue.value = event.target.value
     if (inputValue2.length > 1) {
 
         const response = await useCustomFetch(`/suggestions?term=${inputValue2}`, "GET") as any;
 
-        console.log(response.value, "resз")
+        console.log(response, "resз")
         if (response?.value) {
             items.value = response.value
 
