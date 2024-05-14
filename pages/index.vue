@@ -3,10 +3,22 @@
     <div class="hero w-full">
         <div class="w-full flex justify-center items-center ">
             <div class="w-full xl:w-1/3  md:w-1/2 sm:w-full   flex flex-col justify-center max-w-xl">
-                <h1 class="hero-text my-10 text-center leading-none text-4xl  lg:text-7xl md:text-6xl font-extrabold ">
-                      Lorem ipsum
-                    dolor sit amet  <span :class="{'slide-in': animated}">{{ currentWord }}</span>  consectetur.
-                </h1> 
+
+                <div class="hero-text my-10 text-center leading-none text-4xl md:text-7xl sm:text-5xl font-extrabold ">
+                    <div>Lorem </div>
+                    <div>ipsum</div>
+                    <div>dolor</div>
+                    <div>sit</div>
+                    <div>amet</div>
+                    <div>consectetur</div>
+                    <div class="bg-templateprimary-600">
+
+                        <div class="slide-in" :key="currentWord">{{ currentWord }}</div>
+                    </div>
+                    <div>Lorem.</div>
+
+                </div>
+
                 <!-- <SearchSuggesions /> -->
                 <HomeSearch />
             </div>
@@ -36,18 +48,13 @@ definePageMeta({
 const words = ["jnvj", "kjhdkf"]
 var currentIndex = ref(0)
 var currentWord = ref('')
-var animated = ref(true)
 
-onMounted(()=>{
+var animated = ref(false)
+onMounted(() => {
 
     setInterval(() => {
         currentIndex.value = (currentIndex.value + 1) % words.length;
-        // animated.value = true;
-        // setTimeout(() => {
-        //     animated.value = false;
-        // }, 1000); // Adjust timing as needed
-    }, 2000)
-
+    }, 3000)
 })
 
 currentWord = computed(() => {
@@ -64,6 +71,8 @@ currentWord = computed(() => {
     font-weight: 700;
 } */
 
+
+
 .hero {
     height: 87vh
 }
@@ -72,6 +81,7 @@ currentWord = computed(() => {
   animation: moveFromTop 2s ease-in-out;
 }
 
+
 @keyframes moveFromTop {
   from {
     transform: translateX(-100%);
@@ -79,6 +89,14 @@ currentWord = computed(() => {
   to {
     transform: translateX(0);
   }
+}
+
+
+@keyframes slideInAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
 }
 
 @keyframes changeWord {

@@ -13,8 +13,10 @@
             </UButtonGroup> -->
 
             <input v-model="inputValue" type="text" class="w-full h-14 focus:outline-none px-5 bg-transparent "
-                placeholder="өблориаылирал рол" autofocus  @input="handleInput"   @keypress.enter="handleSubmit" 
-                @click="handleInputClick" @onchange="handleChange" >
+                placeholder="өблориаылирал рол" autofocus pattern="^[а-яА-ЯөӨёЁүҮ ]*$" @input="handleInput"
+                @click="handleInputClick" oninvalid="setCustomValidity('Зөвхөн криллээр хайлт өгнө үү')"
+                @onchange="handleChange" @focus="isInputFocused = true" @blur="isInputFocused = false">
+
             <UButton size="sm" icon="i-heroicons-magnifying-glass-20-solid" :trailing="true" class="px-5">Хайх
             </UButton>
         </form>
@@ -23,7 +25,6 @@
         <div v-show="open" class="modal transition-opacity absolute bg-white text-black rounded py-2 px-5 w-full 
         drop-shadow-xl">
             <div class="modal-content">
-
                 <ul class="  ">
                     <li v-for="item in items" :key="item.Word">
                         <ULink :to="`/dictionary/${item.Word}`" @click="handleLinkClick(item.Word)">
@@ -36,9 +37,7 @@
                 </ul>
            
             </div>
-
         </div>
-
     </div>
 </template>
 
@@ -54,7 +53,10 @@ const target = ref(null)
 const isInputFocused = ref(false);
 
 const handleSubmit = () => {
-    navigateTo(`/dictionary/${inputValue.value}`)
+    inputValue.value = inputValue.value.trim()
+    if (inputValue.value) {
+        navigateTo(`/dictionary/${inputValue.value}`)
+    }
 };
 
 
@@ -85,14 +87,21 @@ if (route.params.word) {
 
 }
 const handleInput = async (event: any) => {
-    console.log(event.target.value)
-    var inputValue2 = event.target.value;
-    // inputValue.value = event.target.value
-    if (inputValue2.length > 1) {
 
-        const response = await useCustomFetch(`/suggestions?term=${inputValue2}`, "GET") as any;
+    const input = event.target;
+    const value = input.value;
 
-        console.log(response, "resз")
+    if (!value.match(/^[а-яА-ЯөӨёЁүҮ ]*$/)) {
+        input.setCustomValidity('Зөвхөн криллээр хайлт өгнө үү')
+        return
+    } else {
+        input.setCustomValidity('')
+    }
+
+    if (value > 1) {
+
+        const response = await useCustomFetch(`/suggestions?term=${value}`, "GET") as any;
+
         if (response?.value) {
             items.value = response.value
 
