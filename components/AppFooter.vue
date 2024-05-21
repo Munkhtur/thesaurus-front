@@ -4,11 +4,7 @@
         <ul>
             <li>kjdnvlkdnb</li>
             <li>kjdnvlkdnb</li>
-            <li>kjdnvlkdnb</li>
-            <li>kjdnvlkdnb</li>
-            <li>kjdnvlkdnb</li>
-            <li>kjdnvlkdnb</li>
-            <li>kjdnvlkdnb</li>
+      
         </ul>
     </div>
 </template>

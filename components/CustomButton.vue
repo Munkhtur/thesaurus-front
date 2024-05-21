@@ -29,6 +29,7 @@ const computedClasses = [
     'focus:outline-none text-red-950 bg-templateprimary-500 hover:bg-templateprimary-600 focus:ring-4  focus:ring-templateprimary-900 font-semibold rounded-lg text-m px-4 py-2 mb-2 dark:bg-templateprimary-300  dark:hover:bg-templateprimary-600 dark:focus:ring-templateprimary-900',
     'focus:outline-none text-red-950 bg-templateprimary-300 hover:bg-templateprimary-300 focus:ring-4  focus:ring-templateprimary-900 font-semibold rounded-lg text-m px-4 py-2 mb-2 dark:bg-templateprimary-50  dark:hover:bg-templateprimary-300 dark:focus:ring-templateprimary-900',
     'focus:outline-none text-red-950 bg-templateprimary-50 hover:bg-templateprimary-300 focus:ring-4  focus:ring-templateprimary-900 font-semibold rounded-lg text-m px-4 py-2 mb-2 dark:bg-templateprimary-50  dark:hover:bg-templateprimary-300 dark:focus:ring-templateprimary-900',
+    'focus:outline-none border-2 border-templateprimary-50 text-red-950 bg-templateprimary-10 hover:bg-templateprimary-300 focus:ring-4  focus:ring-templateprimary-900 font-semibold rounded-lg text-m px-4 py-2 mb-2 dark:bg-white  dark:hover:bg-templateprimary-300 dark:focus:ring-templateprimary-900',
 ]
 
 

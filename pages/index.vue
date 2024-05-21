@@ -4,18 +4,13 @@
         <div class="w-full flex justify-center items-center ">
             <div class="w-full xl:w-1/3  md:w-1/2 sm:w-full   flex flex-col justify-center max-w-xl">
 
-                <div class="hero-text my-10 text-center leading-none text-4xl md:text-7xl sm:text-5xl font-extrabold ">
-                    <div>Lorem </div>
-                    <div>ipsum</div>
-                    <div>dolor</div>
-                    <div>sit</div>
-                    <div>amet</div>
-                    <div>consectetur</div>
+                <div class="hero-text my-10 text-center leading-none text-4xl md:text-5xl sm:text-5xl font-extrabold ">
+       Үг бол нэршилийн мартагдсан сүнс юм. Нэршил хүчтэйн адилаар үг
                     <div class="bg-templateprimary-600">
 
                         <div class="slide-in" :key="currentWord">{{ currentWord }}</div>
                     </div>
-                    <div>Lorem.</div>
+                 
 
                 </div>
 
@@ -23,18 +18,16 @@
                 <HomeSearch />
             </div>
         </div>
-        <div class="flex justify-center gap-44 my-20 text-3xl">
+        <div class="flex justify-center gap-10 text-3xl">
             <div class="flex flex-col justify-center items-center">
-                <div class="font-bold">30000+</div>
-                <div>snlsrejng</div>
+                <div class="font-bold">1300+</div>
+                <div>Толгой үг</div>
             </div>
             <div class="flex flex-col justify-center items-center">
-                <div class="font-bold">30000+</div>
-                <div>snlsrejng</div>
+                <div class="font-bold">17000+</div>
+                <div>Нийт үг</div>
             </div>
         </div>
-
-        <p>ksdjfnvlksfjd<br> knesrlkjtgnkj</p>
     </div>
 </template>
 
@@ -45,7 +38,7 @@ definePageMeta({
     layout: "home",
 });
 
-const words = ["jnvj", "kjhdkf"]
+const words = ["хүчтэй", "бядтай", "тэнхээтэй", "эрчтэй", "тамиртай", "дорвитой", "бяртай", "чадалтай"]
 var currentIndex = ref(0)
 var currentWord = ref('')
 
@@ -78,16 +71,18 @@ currentWord = computed(() => {
 }
 
 .slide-in {
-  animation: moveFromTop 2s ease-in-out;
+  animation: moveFromTop 1s ease-in-out;
 }
 
 
 @keyframes moveFromTop {
   from {
-    transform: translateX(-100%);
+    transform: translateY(-100%);
+    opacity: 0;
   }
   to {
-    transform: translateX(0);
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -101,16 +96,16 @@ currentWord = computed(() => {
 
 @keyframes changeWord {
   0% {
-    /* opacity: 0; */
+    opacity: 0;
     transform: translateY(-50%);
   }
   50% {
-    /* opacity: 1; */
+    opacity: 1;
     transform: translateY(0);
   }
   100% {
       transform: translateY(50%);
-    /* opacity: 0; */
+    opacity: 0;
   }
 }
 </style>

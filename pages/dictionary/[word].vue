@@ -1,7 +1,29 @@
 <template>
 
     <div class="container w-full xl:w-1/2  md:w-[75%] sm:w-full  dark:bg-eerie_black min-h-screen mx-auto p-10">
-        <template v-if="items && items.length > 0">
+        <template v-if="loading">
+            <div class="flex flex-col gap-4">
+                <USkeleton class="h-10 w-[250px]" />
+                <div class="flex items-center gap-5">
+
+                    <USkeleton class="h-6 w-6" :ui="{ rounded: 'rounded-full' }" />
+                    <USkeleton class="h-4 w-[250px]" />
+                </div>
+                <div class="flex flex-wrap ml-5 gap-5">
+                    <USkeleton v-for="i in 20" class="h-10 w-[100px]" />
+                </div>
+                <div class="flex items-center gap-5">
+
+                    <USkeleton class="h-6 w-6" :ui="{ rounded: 'rounded-full' }" />
+                    <USkeleton class="h-4 w-[250px]" />
+                </div>
+                <div class="flex flex-wrap ml-5 gap-5">
+                    <USkeleton v-for="i in 20" class="h-10 w-[100px]" />
+                </div>
+    
+  </div>
+        </template>
+        <template v-else-if="items && items.length > 0">
 
             <div class="flex justify-between items-center my-10">
 
@@ -19,6 +41,7 @@
                     <div class="w-3 h-2 rounded bg-templateprimary-950"></div>
                     <div class="w-3 h-2 rounded bg-templateprimary-600"></div>
                     <div class="w-3 h-2 rounded bg-templateprimary-300"></div>
+                    <div class="w-3 h-2 rounded bg-white border-2 border-templateprimary-50 "></div>
                 </div>
             </div>
             <DefnitionBlock v-for="(item, index) in items" :key="index" :word="item" :index="index" />
@@ -42,7 +65,7 @@ console.log(route.params.word, "params")
 // items.value = dictionaryData as any;
 
 // Assuming items.value is an array of IResponseWords objects
-
+var loading = ref(false)
 
 onMounted(() => {
     console.log(route.params.word, "onm")
@@ -50,7 +73,7 @@ onMounted(() => {
 })
 
 const loadData = async () => {
-
+        loading.value = true
     try {
 
         const response = await $fetch("http://localhost:8000/find" , {
@@ -63,11 +86,13 @@ const loadData = async () => {
         if (response) {
             items.value = response as any
         }
+        loading.value = false
     } catch (error: any) {
         toast.add({
             title: error.value.data.message ?? "Амжилтгүй",
             color: "amber",
         });
+        loading.value = false
     }
 
     // items.value.forEach(async (element: IResponseWords) => {

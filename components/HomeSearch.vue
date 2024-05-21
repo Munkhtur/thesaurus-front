@@ -13,11 +13,11 @@
             </UButtonGroup> -->
 
             <input v-model="inputValue" type="text" class="w-full h-14 focus:outline-none px-5 bg-transparent "
-                placeholder="өблориаылирал рол" autofocus pattern="^[а-яА-ЯөӨёЁүҮ ]*$" @input="handleInput"
+                placeholder="" autofocus pattern="^[а-яА-ЯөӨёЁүҮ ]*$" @input="handleInput"
                 @click="handleInputClick" oninvalid="setCustomValidity('Зөвхөн криллээр хайлт өгнө үү')"
                 @onchange="handleChange" @focus="isInputFocused = true" @blur="isInputFocused = false">
 
-            <UButton size="sm" icon="i-heroicons-magnifying-glass-20-solid" :trailing="true" class="px-5">Хайх
+            <UButton size="sm" icon="i-heroicons-magnifying-glass-20-solid" :trailing="true" class="px-5" type="submit">Хайх
             </UButton>
         </form>
 
@@ -26,9 +26,9 @@
         drop-shadow-xl">
             <div class="modal-content">
                 <ul class="  ">
-                    <li v-for="item in items" :key="item.Word">
+                    <li v-for="(item, i) in items" :key="item.Word">
                         <ULink :to="`/dictionary/${item.Word}`" @click="handleLinkClick(item.Word)">
-                            <div class="w-full hover:bg-gray-500 p-1 rounded">
+                            <div class="w-full hover:bg-gray-500 p-1 rounded"  :class="{ active: activeIndex === i }">
                                 <strong>{{ getName(item.Word)[0] }}</strong><span>{{ getName(item.Word)[1] }}</span>
                             </div>
                         </ULink>
@@ -51,8 +51,10 @@ var inputValue = ref('')
 var items = ref<IResponseWords[]>([])
 const target = ref(null)
 const isInputFocused = ref(false);
+var activeIndex = ref(0)
 
 const handleSubmit = () => {
+    open.value = false
     inputValue.value = inputValue.value.trim()
     if (inputValue.value) {
         navigateTo(`/dictionary/${inputValue.value}`)
@@ -98,7 +100,7 @@ const handleInput = async (event: any) => {
         input.setCustomValidity('')
     }
 
-    if (value > 1) {
+    if (value.length > 1) {
 
         const response = await useCustomFetch(`/suggestions?term=${value}`, "GET") as any;
 
@@ -137,6 +139,42 @@ const moveCaretAtEnd = (e: any) => {
     e.target.value = temp_value
 }
 
+function    moveDown() {
+      if (activeIndex === null || activeIndex.value >= items.value.length - 1) {
+        activeIndex.value = 0;
+      } else {
+        activeIndex.value++;
+      }
+      inputValue.value =  items.value[activeIndex.value].Word;
+
+    }
+
+    function moveUp() {
+      if (activeIndex === null || activeIndex.value <= 0) {
+        activeIndex.value = items.value.length - 1;
+      } else {
+        activeIndex.value--;
+      }
+
+      inputValue.value =  items.value[activeIndex.value].Word;
+    }
+function handleKeydown(event:any) {
+      if (event.key === 'ArrowDown') {
+        moveDown();
+      } else if (event.key === 'ArrowUp') {
+        moveUp();
+      } 
+    }
+
+onMounted(() => {
+      window.addEventListener('keydown', handleKeydown);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('keydown', handleKeydown);
+    });
+
+
 
 </script>
 <style scoped>
@@ -146,5 +184,8 @@ const moveCaretAtEnd = (e: any) => {
 
 .focused {
     outline: 2px solid #d56222;
+}
+.active{
+    background-color: rgb(243 244 246);
 }
 </style>
